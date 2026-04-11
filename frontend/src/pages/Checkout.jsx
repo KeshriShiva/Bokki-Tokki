@@ -41,9 +41,20 @@ const Checkout = ({ cart, setCart, cartTotal }) => {
 
       const data = await response.json();
       if (data.success) {
-        setStatus('Order placed successfully!');
+        setStatus('Order placed successfully! Redirecting to WhatsApp...');
+        
+        // --- WhatsApp Redirect Logic ---
+        const phoneNumber = '918445622801';
+        const itemsText = cart.map(item => `- ${item.name} (Qty: ${item.quantity}) = ₹${item.price * item.quantity}`).join('\n');
+        
+        const messageText = `*New Order from Bokki Tokki!* 🍜\n\n*Customer Details:*\nName: ${formData.customerName}\nPhone: ${formData.customerPhone}\nLocation: ${formData.deliveryLocation}\n\n*Order Items:*\n${itemsText}\n\n*Total Amount:* ₹${cartTotal}`;
+        
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageText)}`;
+        window.open(whatsappUrl, '_blank'); // Opens in a new tab/app
+        // -------------------------------
+
         setCart([]); // Clear cart
-        setTimeout(() => navigate('/'), 3000);
+        setTimeout(() => navigate('/'), 4000);
       } else {
         setStatus('Failed to place order.');
       }
