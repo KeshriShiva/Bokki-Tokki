@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: bokki-tokki-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: API_KEY
+        value: "bokki-tokki-super-secret-key"
