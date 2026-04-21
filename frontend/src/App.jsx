@@ -1,23 +1,11 @@
 import { useState, Component, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import ReactGA from 'react-ga4';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
 
-ReactGA.initialize("G-TWECMHWJ5W");
-
-function AnalyticsTracker() {
-  const location = useLocation();
-
-  useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
-  }, [location]);
-
-  return null;
-}
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -70,7 +58,6 @@ function App() {
 
   return (
     <Router>
-      <AnalyticsTracker />
       <ErrorBoundary>
         <Navbar cartCount={cartCount} />
         <div className="page-wrapper">
