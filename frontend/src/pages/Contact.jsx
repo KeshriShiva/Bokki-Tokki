@@ -11,8 +11,7 @@ const Contact = () => {
     e.preventDefault();
     setStatus('Sending...');
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'https://bokki-tokki.onrender.com';
-      const response = await fetch(`${API_URL}/api/queries`, {
+      const response = await fetch(`/api/queries`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

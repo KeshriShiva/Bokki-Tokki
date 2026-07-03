@@ -6,7 +6,13 @@ import Menu from './pages/Menu';
 import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
 
-
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +64,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <ErrorBoundary>
         <Navbar cartCount={cartCount} />
         <div className="page-wrapper">
