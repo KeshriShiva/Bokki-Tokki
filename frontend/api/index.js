@@ -1,8 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const nodemailer = require('nodemailer');
+import 'dotenv/config';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import nodemailer from 'nodemailer';
 
 // Set up Nodemailer email transport
 const transporter = nodemailer.createTransport({
@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const Order = require('./models/Order');
-const Query = require('./models/Query');
+import Order from './models/Order.js';
+import Query from './models/Query.js';
 
 const app = express();
 
@@ -128,11 +128,12 @@ app.post('/api/queries', apiKeyCheck, async (req, res) => {
   }
 });
 
-if (require.main === module) {
+// Local dev server fallback (for manual testing if needed)
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
 }
 
-module.exports = app;
+export default app;
